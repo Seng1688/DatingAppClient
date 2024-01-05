@@ -1,1 +1,73 @@
-<p>member-detail works!</p>
+<div class="row" *ngIf="member">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{member.photoUrl || 'assets/user.png'}}" alt="{{member.knownAs}}" class="img-thumbnail">
+            <div class="card-body">
+                <div>
+                    <strong>Location:</strong>
+                    <p>{{member.city}}, {{member.country}}</p>
+                </div>
+                <div>
+                    <strong>Age:</strong>
+                    <p>{{member.age}}</p>
+                </div>
+                <div>
+                    <strong>Location:</strong>
+                    <p>{{member.lastActive}}</p>
+                </div>
+                <div>
+                    <strong>Member Since:</strong>
+                    <p>{{member.created}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-secondary">Like</button>
+                    <button class="btn btn-primary ">Messages</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" (click)="selectTab('About')">
+                <a class="nav-link" [class.active]="tabSelected === 'About'">About {{member.knownAs}}</a>
+            </li>
+            <li class="nav-item" (click)="selectTab('Interest')">
+                <a class="nav-link" [class.active]="tabSelected === 'Interest'">Interest</a>
+            </li>
+            <li class="nav-item" (click)="selectTab('Photos')">
+                <a class="nav-link" [class.active]="tabSelected === 'Photos'">Photos</a>
+            </li>
+            <li class="nav-item" (click)="selectTab('Messages')">
+                <a class="nav-link " [class.active]="tabSelected === 'Messages'">Messages</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div *ngIf="tabSelected === 'About'">
+                <h4>Description</h4>
+                <p>{{member.introduction}}</p>
+                <h4>Looking For</h4>
+                <p>{{member.lookingFor}}</p>
+            </div>
+
+            <div *ngIf="tabSelected === 'Interest'">
+                <h4>Interest</h4>
+                <p>{{member.interests}}</p>
+            </div>
+
+            <div *ngIf="tabSelected === 'Photos'">
+                <p>Photos will go here</p>
+                <gallery [items]="images" thumbPosition="left" ></gallery>
+            </div>
+
+            <div *ngIf="tabSelected === 'Messages'">
+                <p>Messages will go here</p>
+            </div>
+        </div>
+
+
+    </div>
+</div>
